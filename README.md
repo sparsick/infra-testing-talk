@@ -7,6 +7,8 @@
 
 ### Testing interaction with E-Mails
 
+receive email => Spring integration
+
 ### Testing interaction with SFTP
 
 ### Testing interaciton with SSH
