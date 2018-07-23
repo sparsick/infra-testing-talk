@@ -1,0 +1,19 @@
+# container structure tests
+schemaVersion: "2.0.0"
+
+metadataTest:
+  env:
+    - key: CATALINA_HOME
+      value: /opt/tomcat
+  exposedPorts: ["8080"]
+  entrypoint: ["catalina.sh"]
+  cmd: ["run"]
+  workdir: "/opt/tomcat"
+
+
+fileExistenceTests:
+
+  - name: 'catalina.sh'
+    path: '/opt/tomcat/bin/catalina.sh'
+    shouldExist: true
+    permissions: '-rwxr-x---'
