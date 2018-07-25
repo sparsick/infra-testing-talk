@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+        stages {
+            stage('YAML Syntax check') {
+                steps {
+                    ansiblePlaybook inventory: 'inventories/test', extras: '--syntax-check', playbook: 'setup-app.yml'
+                    ansiblePlaybook inventory: 'inventories/test', extras: '--syntax-check', playbook: 'setup-db.yml'
+                }
+            }
+            stage('Ansible Lint Check') {
+                steps {
+                    sh 'ansible-lint *.yml'
+                }
+            }
+            stage('Ansible Playbook run with tests') {
+                steps {
+                    sh 'vagrant up'
+                    ansiblePlaybook inventory: 'inventories/test', playbook: 'setup-app.yml'
+                    ansiblePlaybook inventory: 'inventories/test', playbook: 'setup-db.yml'
+                    sh 'py.test --connection=ansible --ansible-inventory inventories/test -v tests/*.py'
+                }
+            }
+        }
+    post {
+        always {
+            sh 'vagrant destroy -f'
+        }
+    }
+}

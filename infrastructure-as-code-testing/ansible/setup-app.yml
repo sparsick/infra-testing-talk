@@ -1,0 +1,41 @@
+- hosts: application-server
+  vars:
+    tomcat_version: 8.5.8
+    tomcat_base_name: apache-tomcat-{{ tomcat_version }}
+    #catalina_opts: "-Dkey=value"
+
+  tasks:
+    - name: install java
+      apt: name=openjdk-8-jdk state=present
+      become: yes
+      become_method: sudo
+
+    - name: Download current Tomcat 8 version
+      local_action: get_url url="http://archive.apache.org/dist/tomcat/tomcat-8/v{{ tomcat_version }}/bin/{{ tomcat_base_name }}.tar.gz" dest=/tmp
+
+    - name:
+      file: name=/opt mode=777
+      become: yes
+      become_method: sudo
+
+    - name: Install Tomcat 8
+      unarchive: src=/tmp/{{ tomcat_base_name }}.tar.gz dest=/opt creates=/opt/{{ tomcat_base_name }} owner=vagrant group=vagrant
+
+    - name: Set link to tomcat 8
+      file: src=/opt/{{ tomcat_base_name }} dest=/opt/tomcat  state=link force=yes
+
+    - name: setup setenv.sh
+      template: dest="/opt/{{ tomcat_base_name }}/bin/setenv.sh" src="templates/setenv.sh.j2" mode=755
+      when: catalina_opts is defined
+
+    - find: paths="/opt/{{ tomcat_base_name }}/bin" patterns="*.sh"
+      register: result
+
+    - name: ensure tomcat scripts are executable
+      file: name={{item.path}} mode=755
+      with_items: '{{ result.files }}'
+
+    - name: install tomcat as service
+      copy: src=files/tomcat.service dest=/etc/systemd/system/
+      become: yes
+      become_method: sudo

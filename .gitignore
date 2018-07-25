@@ -14,3 +14,41 @@ buildNumber.properties
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
 
+
+# Created by https://www.gitignore.io/api/ansible,vagrant,testinfra,serverspec
+
+### Ansible ###
+*.retry
+
+### Testinfra ###
+__pycache__/
+.pytest_cache/
+
+### Vagrant ###
+# General
+.vagrant/
+
+# Log files (if you are creating logs in debug mode, uncomment this)
+# *.logs
+
+
+# End of https://www.gitignore.io/api/ansible,vagrant,testinfra,serverspec
+
+# Created by https://www.gitignore.io/api/ansible,vagrant,testinfra
+
+### Ansible ###
+*.retry
+
+### Testinfra ###
+__pycache__/
+.pytest_cache/
+
+### Vagrant ###
+# General
+.vagrant/
+
+# Log files (if you are creating logs in debug mode, uncomment this)
+# *.logs
+
+
+# End of https://www.gitignore.io/api/ansible,vagrant,testinfra
