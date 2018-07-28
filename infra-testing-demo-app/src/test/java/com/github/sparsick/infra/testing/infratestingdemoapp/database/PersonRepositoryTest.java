@@ -48,7 +48,5 @@ public class PersonRepositoryTest {
 
         List<Person> persons = repositoryUnderTest.findAllPersons();
         assertThat(persons).hasSize(1).contains(person);
-
-
     }
 }

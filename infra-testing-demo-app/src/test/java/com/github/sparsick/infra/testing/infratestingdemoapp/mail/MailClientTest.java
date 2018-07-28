@@ -65,9 +65,6 @@ class MailClientTest {
         props.setProperty("mail.smtp.user", "from@example.com");
         props.setProperty("mail.smtp.host", "localhost");
         props.setProperty("mail.smtp.from", "from@example.com");
-//        props.setProperty("mail.pop3.user", "from@example.com");
-//        props.setProperty("mail.pop3.host", "localhost");
-//        props.setProperty("mail.pop3.port", "3010");
         javaMailSender.setJavaMailProperties(props);
         javaMailSender.setUsername("test");
         javaMailSender.setPassword("xxx");

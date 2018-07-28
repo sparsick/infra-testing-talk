@@ -13,6 +13,7 @@ public class StarWarsMovieController {
 
     @RequestMapping(value="movies", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody List<StarWarsMovie> findAllMovies(){
-        return List.of(new StarWarsMovie("A New Hope", "George Lucas"), new StarWarsMovie("The Force Awakens", "J. J. Abrams"));
+        return List.of(new StarWarsMovie("A New Hope", "George Lucas"),
+                new StarWarsMovie("The Force Awakens", "J. J. Abrams"));
     }
 }

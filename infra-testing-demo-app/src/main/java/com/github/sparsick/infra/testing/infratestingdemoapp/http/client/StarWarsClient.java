@@ -25,6 +25,15 @@ public class StarWarsClient {
         }
     }
 
+    public StarWarsClient(String protocol, String hostName) {
+        this.restTemplate = new RestTemplateBuilder().build();
+        try {
+            this.baseUrl = new URL(protocol, hostName,"").toString();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<Starship> findAllStarships() {
         List<Starship> starships = new ArrayList<>();
         String nextPageUrl = baseUrl + "/api/starships";
