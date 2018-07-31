@@ -1,8 +1,6 @@
 package com.github.sparsick.infra.testing.infratestingdemoapp.http.client;
 
 
-import com.github.sparsick.infra.testing.infratestingdemoapp.http.client.StarWarsClient;
-import com.github.sparsick.infra.testing.infratestingdemoapp.http.client.Starship;
 import groovy.text.SimpleTemplateEngine;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
@@ -11,6 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.mockserver.client.server.MockServerClient;
 import org.mockserver.junit.MockServerRule;
+import org.mockserver.verify.VerificationTimes;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
@@ -80,6 +79,42 @@ public class StarWarsClientTest {
         List<Starship> allStarships = clientUnderTest.findAllStarships();
 
         assertThat(allStarships).hasSize(11);
+    }
+
+
+    @Test
+    public void verifyFindAllStarshipsRequest(){
+        mockServerClient
+                .when(request()
+                        .withMethod("GET")
+                        .withPath("/api/starships")
+                )
+                .respond(response()
+                        .withBody(testData)
+                );
+        mockServerClient
+                .when(request()
+                        .withMethod("GET")
+                        .withPath("/api/starships2")
+                )
+                .respond(response()
+                        .withBody(testData2)
+                );
+
+        List<Starship> allStarships = clientUnderTest.findAllStarships();
+
+        assertThat(allStarships).hasSize(11);
+
+        mockServerClient
+                .verify(request()
+                                .withMethod("GET")
+                                .withPath("/api/starships"),
+                        VerificationTimes.once());
+        mockServerClient
+                .verify(request()
+                                .withMethod("GET")
+                                .withPath("/api/starships2"),
+                        VerificationTimes.once());
     }
 
 }
