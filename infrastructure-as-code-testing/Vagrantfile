@@ -10,6 +10,12 @@ Vagrant.configure(2) do |config|
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
+  config.trigger.after :up do |trigger|
+    trigger.name = "Copy SSH key"
+    trigger.info = "Copy SSH key"
+    trigger.run = {path: "setupSSH.sh"}
+  end
+
   config.vm.define "test" do |vbox|
     vbox.vm.hostname = "test"
 
