@@ -1,10 +1,10 @@
 # infra-testing-talk
-You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur - 'Integration testing done right ;)'" that I presented on Softwerkskammer Düsseldorf at 26th July 2018.
+You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur - 'Integration testing done right ;)'" that I presented on Softwerkskammer Ruhrgebiet at 8th August 2018.
 
 
 ## Simulate Infrastructure in Software Tests
 All code sample for simulating infrastucture in software tests are in `infra-testing-demo-app`.
-The code samples are tested with Java 10, embedded in a Spring Boot 2.0.3 skeleton. 
+The code samples are tested with Java 10, embedded in a Spring Boot 2.0.3 skeleton.
 Following test libraries are used:
 - JUnit 5.2.0 including JUnit 4 (JUnit Jupiter Vintage)
 - AssertJ 3.10.0
