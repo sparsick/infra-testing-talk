@@ -1,5 +1,5 @@
 # infra-testing-talk
-You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur - 'Integration testing done right ;)'" that I presented on Softwerkskammer Ruhrgebiet at 8th August 2018.
+You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur - 'Integration testing done right ;)'" that I presented on Herbstcampus in Nuremberg at 6th September 2018.
 
 
 ## Simulate Infrastructure in Software Tests
@@ -17,13 +17,13 @@ Following test libraries are used:
 The test class `StarWarsMovieControllerTest` shows how to test own REST API with Spring MVC and REST assured.
 
 ### Mock REST dependencies
-The test class `StarWarsClientTest` shows how to mock dependencies to a REST API with MockServer. 
+The test class `StarWarsClientTest` shows how to mock dependencies to a REST API with MockServer.
 
 ### Testing interaction with E-Mails
 The test class `MailClientTest` shows how to test interaction with e-mails (currently only sending) with Greenmail
 
 ### Testing interaction with Database
-The test class `PersonRepositoryTest`shows how to test the repository logic including the database that is used in production with Testcontainers. 
+The test class `PersonRepositoryTest`shows how to test the repository logic including the database that is used in production with Testcontainers.
 
 ## Infrastructure as Code Testing
 All code samples for infrastructure as code testing are in `infrastructure-as-code-testing`.
@@ -54,7 +54,7 @@ This is also the location for the next CLI calls.
 - Code quality check for the shell script:  `shellcheck setup-svn.sh`.
 
 ### Ansible Playbooks
-Ansible playbook samples are in `infrastrucutre-as-code-testing/ansible`. 
+Ansible playbook samples are in `infrastrucutre-as-code-testing/ansible`.
 This is also the location for the next CLI calls.
 
 - Code quality check for Ansible playbooks: `ansible-lint *.yml`
@@ -62,9 +62,9 @@ This is also the location for the next CLI calls.
 ```
 ansible-playbook -i inventories/test -u vagrant setup-db.yml # MySQL setup
 ansible-playbook -i inventories/test -u vagrant setup-app.yml # Apache Tomcat setup
-``` 
+```
 - Running serverspec tests against a provisioned VM: `rake spec`
-- Running testinfra tests against a provisioned VM: 
+- Running testinfra tests against a provisioned VM:
 ```
 py.test --connection=ansible --ansible-inventory inventories/test -v tests/*.py
 ```
@@ -79,7 +79,7 @@ This is also the location for the next CLI calls.
 ```
 docker build -t sparsick/tomcat9 -f tomcat.df .
 ```
-- Running the Container Structure Tests (prerequisite Docker image is built before): 
+- Running the Container Structure Tests (prerequisite Docker image is built before):
 ```
 container-structure-test test --image sparsick/tomcat9:latest --config tomcat-test.yaml
 ```
