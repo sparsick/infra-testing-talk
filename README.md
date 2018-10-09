@@ -1,5 +1,5 @@
 # infra-testing-talk
-You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur - 'Integration testing done right ;)'" that I presented on Herbstcampus in Nuremberg at 6th September 2018.
+You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur - 'Integration testing done right ;)'" that I presented on JCON in Düsseldorf at 10th October 2018.
 
 
 ## Simulate Infrastructure in Software Tests
