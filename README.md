@@ -23,7 +23,8 @@ The test class `StarWarsClientTest` shows how to mock dependencies to a REST API
 The test class `MailClientTest` shows how to test interaction with e-mails (currently only sending) with Greenmail
 
 ### Testing interaction with Database
-The test class `PersonRepositoryTest`shows how to test the repository logic including the database that is used in production with Testcontainers.
+The test class `PersonRepositoryJUnit4/5Test`shows how to test the repository logic including the database that is used in production with Testcontainers.
+Test class `DBMigrationJUnit4/5Test` shows how to test the database migration script inside my Maven build.
 
 ## Infrastructure as Code Testing
 All code samples for infrastructure as code testing are in `infrastructure-as-code-testing`.
