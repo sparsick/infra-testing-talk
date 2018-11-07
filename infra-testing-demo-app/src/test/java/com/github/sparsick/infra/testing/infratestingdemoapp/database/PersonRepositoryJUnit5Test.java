@@ -4,25 +4,25 @@ package com.github.sparsick.infra.testing.infratestingdemoapp.database;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Testcontainers
+class PersonRepositoryJUnit5Test {
 
-public class PersonRepositoryTest {
-
-    @Rule
-    public PostgreSQLContainer postgres = new PostgreSQLContainer();
+    @Container
+    private PostgreSQLContainer postgres = new PostgreSQLContainer();
 
     private PersonRepository repositoryUnderTest;
 
-    @Before
+    @BeforeEach
     public void setup(){
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl(postgres.getJdbcUrl());
@@ -38,7 +38,7 @@ public class PersonRepositoryTest {
     }
 
     @Test
-    public void saveAndFindAllPerson() {
+    void saveAndFindAllPerson() {
        Person person = new Person();
        person.setFirstName("firstName");
        person.setLastName("lastName");
