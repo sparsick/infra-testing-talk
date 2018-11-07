@@ -4,19 +4,20 @@ package com.github.sparsick.infra.testing.infratestingdemoapp.database;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@Testcontainers
+@Testcontainers
 class PersonRepositoryJUnit5Test {
 
-//    @Container
+    @Container
     private PostgreSQLContainer postgres = new PostgreSQLContainer();
 
     private PersonRepository repositoryUnderTest;

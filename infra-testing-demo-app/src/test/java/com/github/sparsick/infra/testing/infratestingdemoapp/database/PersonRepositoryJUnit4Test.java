@@ -15,7 +15,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class PersonRepositoryTest {
+public class PersonRepositoryJUnit4Test {
 
     @Rule
     public PostgreSQLContainer postgres = new PostgreSQLContainer();
