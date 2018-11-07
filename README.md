@@ -6,11 +6,11 @@ You can find here the slides and the sample code of my talk "Testen von und mit 
 All code sample for simulating infrastucture in software tests are in `infra-testing-demo-app`.
 The code samples are tested with Java 10, embedded in a Spring Boot 2.0.3 skeleton.
 Following test libraries are used:
-- JUnit 5.2.0 including JUnit 4 (JUnit Jupiter Vintage)
+- JUnit 5.3.1 including JUnit 4 (JUnit Jupiter Vintage)
 - AssertJ 3.10.0
 - MockServer 5.3.0
 - Greenmail 1.5.7
-- Testcontainers 1.8.1
+- Testcontainers 1.10.0
 - REST assured 3.1.0
 
 ### Tests against own REST API

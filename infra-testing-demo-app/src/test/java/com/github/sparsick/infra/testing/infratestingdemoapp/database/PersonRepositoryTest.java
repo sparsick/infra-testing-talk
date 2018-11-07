@@ -38,7 +38,7 @@ public class PersonRepositoryTest {
     }
 
     @Test
-    public void saveAndFindAllPerson() throws SQLException {
+    public void saveAndFindAllPerson() {
        Person person = new Person();
        person.setFirstName("firstName");
        person.setLastName("lastName");
