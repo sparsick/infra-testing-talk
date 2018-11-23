@@ -1,5 +1,5 @@
 # infra-testing-talk
-You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur - 'Integration testing done right ;)'" that I presented on Continuous Lifecycle in Mannheim at 14th November 2018.
+You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur - 'Integration testing done right ;)'" that I presented on Agile Testing Meetup in Düsseldorf at 22nd November 2018.
 
 
 ## Simulate Infrastructure in Software Tests
