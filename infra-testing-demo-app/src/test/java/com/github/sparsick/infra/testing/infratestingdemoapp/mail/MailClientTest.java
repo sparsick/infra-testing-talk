@@ -1,15 +1,10 @@
 package com.github.sparsick.infra.testing.infratestingdemoapp.mail;
 
-import com.icegreen.greenmail.junit.GreenMailRule;
-import com.icegreen.greenmail.user.GreenMailUser;
+import com.icegreen.greenmail.configuration.GreenMailConfiguration;
 import com.icegreen.greenmail.util.GreenMail;
-import com.icegreen.greenmail.util.GreenMailUtil;
-import com.icegreen.greenmail.util.ServerSetup;
 import com.icegreen.greenmail.util.ServerSetupTest;
 import org.jetbrains.annotations.NotNull;
-import org.junit.Rule;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,7 +12,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-
 import java.io.IOException;
 import java.util.Properties;
 
@@ -30,9 +24,10 @@ class MailClientTest {
     private MailClient clientUnderTest;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         JavaMailSender javaMailSender = createJavaMailSender();
         clientUnderTest = new MailClient(javaMailSender);
+        greenMail.withConfiguration(GreenMailConfiguration.aConfig().withUser("test", "xxx"));
         greenMail.start();
     }
 
@@ -51,7 +46,7 @@ class MailClientTest {
     }
 
     @AfterEach
-    void cleanUp(){
+    void cleanUp() {
         greenMail.stop();
     }
 
