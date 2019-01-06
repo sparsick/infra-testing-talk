@@ -2,9 +2,11 @@ package com.github.sparsick.infra.testing.infratestingdemoapp.mail;
 
 import com.icegreen.greenmail.configuration.GreenMailConfiguration;
 import com.icegreen.greenmail.util.GreenMail;
+import com.icegreen.greenmail.util.ServerSetup;
 import com.icegreen.greenmail.util.ServerSetupTest;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,17 +16,27 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 class MailClientTest {
 
-    private GreenMail greenMail = new GreenMail(ServerSetupTest.SMTP);
+    private static ServerSetup smtp;
+    private GreenMail greenMail;
     private MailClient clientUnderTest;
+
+    @BeforeAll
+    static void setUpAll() {
+        int portOffset = ThreadLocalRandom.current().nextInt(1000, 2000);
+        smtp = new ServerSetup(25 + portOffset, null, "smtp");
+    }
 
     @BeforeEach
     void setUp() {
+        greenMail = new GreenMail(smtp);
         JavaMailSender javaMailSender = createJavaMailSender();
         clientUnderTest = new MailClient(javaMailSender);
         greenMail.withConfiguration(GreenMailConfiguration.aConfig().withUser("test", "xxx"));
@@ -55,7 +67,7 @@ class MailClientTest {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
         Properties props = new Properties();
         props.setProperty("mail.transport.protocol", "smtp");
-        props.setProperty("mail.smtp.port", "3025");
+        props.setProperty("mail.smtp.port", String.valueOf(smtp.getPort()));
         props.setProperty("mail.smtp.auth", "true");
         props.setProperty("mail.smtp.user", "from@example.com");
         props.setProperty("mail.smtp.host", "localhost");
