@@ -31,7 +31,7 @@ class MailClientTest {
     @BeforeAll
     static void setUpAll() {
         int portOffset = ThreadLocalRandom.current().nextInt(1000, 2000);
-        smtp = new ServerSetup(25 + portOffset, null, "smtp");
+        smtp = new ServerSetup(25 + portOffset, null, ServerSetup.PROTOCOL_SMTP);
     }
 
     @BeforeEach
