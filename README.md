@@ -1,16 +1,16 @@
 # infra-testing-talk
-You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur - 'Integration testing done right ;)'" that I presented on Agile Testing Meetup in Düsseldorf at 22nd November 2018.
+You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur - 'Integration testing done right ;)'" that I presented on JUG Bonn at 8th January 2019.
 
 
 ## Simulate Infrastructure in Software Tests
 All code sample for simulating infrastucture in software tests are in `infra-testing-demo-app`.
 The code samples are tested with Java 10, embedded in a Spring Boot 2.0.3 skeleton.
 Following test libraries are used:
-- JUnit 5.3.1 including JUnit 4 (JUnit Jupiter Vintage)
+- JUnit 5.3.2 including JUnit 4 (JUnit Jupiter Vintage)
 - AssertJ 3.10.0
-- MockServer 5.3.0
-- Greenmail 1.5.7
-- Testcontainers 1.10.0
+- MockServer 5.4.1
+- Greenmail 1.5.9
+- Testcontainers 1.10.5
 - REST assured 3.1.0
 
 ### Tests against own REST API
