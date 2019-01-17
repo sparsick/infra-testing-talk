@@ -1,5 +1,5 @@
 # infra-testing-talk
-You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur - 'Integration testing done right ;)'" that I presented on Softwerkskammer Jena / DevOps Thüringen in Jena at 15th January 2019.
+You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur - 'Integration testing done right ;)'" that I presented on Softwerkskammer Jena / DevOps Thüringen in Jena at 16th January 2019.
 
 
 ## Simulate Infrastructure in Software Tests
