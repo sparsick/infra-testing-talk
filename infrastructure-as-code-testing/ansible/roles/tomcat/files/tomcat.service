@@ -1,0 +1,12 @@
+[Unit]
+Description="Apache Tomcat Servlet container"
+After=network.target
+
+[Service] 
+ExecStart=/opt/tomcat/bin/catalina.sh run
+ExecStop=/opt/tomcat/bin/catalina.sh stop
+PidFile=/var/run/tomcat.pid
+User=vagrant
+
+[Install]
+WantedBy=multi-user.target

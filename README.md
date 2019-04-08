@@ -71,7 +71,10 @@ ansible-playbook -i inventories/test -u vagrant setup-app.yml # Apache Tomcat se
 ```
 py.test --connection=ansible --ansible-inventory inventories/test -v tests/*.py
 ```
+#### Molecule
+Molecule is an aggregator over some testing tools for Ansible roles.
 
+For running Molecule go to `infrasructure-as-code-testing/ansible/roles/tomcat` and run `molecule test`
 
 ### Docker Image
 Dockerfile sample is in `infrastrucutre-as-code-testing/docker`.
