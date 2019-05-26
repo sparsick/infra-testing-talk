@@ -23,7 +23,7 @@ class PersonRepositoryJUnit5Test {
     private PersonRepository repositoryUnderTest;
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl(postgres.getJdbcUrl());
         hikariConfig.setUsername(postgres.getUsername());
