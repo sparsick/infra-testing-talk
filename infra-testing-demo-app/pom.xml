@@ -23,6 +23,7 @@
 	<properties>
 		<junit.jupiter.version>5.4.2</junit.jupiter.version>
         <testcontainers.version>1.11.3</testcontainers.version>
+        <rest-assured.version>4.0.0</rest-assured.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>11</java.version>
@@ -140,8 +141,13 @@
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
             <artifactId>spring-mock-mvc</artifactId>
-            <version>4.0.0</version>
+            <version>${rest-assured.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
