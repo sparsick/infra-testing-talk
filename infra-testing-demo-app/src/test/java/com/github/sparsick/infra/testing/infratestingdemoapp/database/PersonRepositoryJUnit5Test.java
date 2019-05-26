@@ -30,8 +30,7 @@ class PersonRepositoryJUnit5Test {
         hikariConfig.setPassword(postgres.getPassword());
 
         HikariDataSource ds = new HikariDataSource(hikariConfig);
-        Flyway flyway = new Flyway();
-        flyway.setDataSource(ds);
+        Flyway flyway = Flyway.configure().dataSource(ds).load();
         flyway.migrate();
 
         repositoryUnderTest = new PersonRepository(ds);

@@ -12,9 +12,9 @@ public class DbMigrationJUnit4Test {
     
     @Test
     public void testDbMigrationFromTheScratch(){
-        Flyway flyway = new Flyway();
-        flyway.setDataSource(mysqlDb.getJdbcUrl(), mysqlDb.getUsername(), mysqlDb.getPassword());
-        
+        Flyway flyway = Flyway.configure().dataSource(mysqlDb.getJdbcUrl(), mysqlDb.getUsername(), mysqlDb.getPassword()).load();
+
+
         flyway.migrate();
     }
     
