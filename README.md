@@ -4,26 +4,27 @@ You can find here the slides and the sample code of my talk "Testen von und mit 
 
 ## Simulate Infrastructure in Software Tests
 All code sample for simulating infrastucture in software tests are in `infra-testing-demo-app`.
-The code samples are tested with Java 11, embedded in a Spring Boot 2.1.4 skeleton.
+The code samples are tested with Java 11, embedded in a Spring Boot 2.1.5 skeleton.
 Following test libraries are used:
-- JUnit 5.4.1 including JUnit 4 (JUnit Jupiter Vintage)
+- JUnit 5.4.2 including JUnit 4 (JUnit Jupiter Vintage)
 - AssertJ 3.12.2
 - MockServer 5.4.1
 - Greenmail 1.5.10
-- Testcontainers 1.11.1
-- REST assured 3.3.0
+- Testcontainers 1.11.3
+- REST assured 4.0.0
+- Spock 1.3
 
 ### Tests against own REST API
-The test class `StarWarsMovieControllerTest` shows how to test own REST API with Spring MVC and REST assured.
+The test class `StarWarsMovieControllerITest` shows how to test own REST API with Spring MVC and REST assured.
 
 ### Mock REST dependencies
-The test class `StarWarsClientTest` shows how to mock dependencies to a REST API with MockServer.
+The test class `StarWarsClientTest` and `StarWarsClientGroovyTest` show how to mock dependencies to a REST API with MockServer.
 
 ### Testing interaction with E-Mails
 The test class `MailClientTest` shows how to test interaction with e-mails (currently only sending) with Greenmail
 
 ### Testing interaction with Database
-The test class `PersonRepositoryJUnit4/5Test`shows how to test the repository logic including the database that is used in production with Testcontainers.
+The test class `PersonRepositoryJUnit4/5/SpockTest`shows how to test the repository logic including the database that is used in production with Testcontainers.
 Test class `DBMigrationJUnit4/5Test` shows how to test the database migration script inside my Maven build.
 
 ## Infrastructure as Code Testing

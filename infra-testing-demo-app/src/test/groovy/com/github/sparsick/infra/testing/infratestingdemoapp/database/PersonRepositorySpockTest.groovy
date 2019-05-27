@@ -8,8 +8,6 @@ import org.testcontainers.spock.Testcontainers
 import spock.lang.Shared
 import spock.lang.Specification
 
-import static org.assertj.core.api.Assertions.assertThat
-
 @Testcontainers
 class PersonRepositorySpockTest extends Specification {
 

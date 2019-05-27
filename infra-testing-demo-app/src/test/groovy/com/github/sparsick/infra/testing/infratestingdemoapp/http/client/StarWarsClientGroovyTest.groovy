@@ -14,17 +14,16 @@ import static org.mockserver.model.HttpResponse.response
 
 class StarWarsClientGroovyTest {
 
-    private static String starship1TestDataTemplate;
-    private static String starship2TestDataTemplate;
+    private static String starship1TestDataTemplate
+    private static String starship2TestDataTemplate
+    private String testData
+    private String testData2
 
     @Rule
-    public MockServerRule mockServerRule = new MockServerRule(this);
+    public MockServerRule mockServerRule = new MockServerRule(this)
 
-    private MockServerClient mockServerClient = mockServerRule.getClient();
-    private StarWarsClient clientUnderTest = new StarWarsClient("http","localhost", mockServerRule.getPort());
-    private String testData;
-    private String testData2;
-
+    private MockServerClient mockServerClient = mockServerRule.getClient()
+    private StarWarsClient clientUnderTest = new StarWarsClient("http","localhost", mockServerRule.getPort())
 
     @BeforeClass
     static void "setup test data"()  {
@@ -40,10 +39,9 @@ class StarWarsClientGroovyTest {
         testData2 = new SimpleTemplateEngine().createTemplate(starship2TestDataTemplate).make(binding).toString()
     }
 
-
     @Test
     void "find all starships"() {
-       mockServerClient
+        mockServerClient
                 .when(request()
                         .withMethod("GET")
                         .withPath("/api/starships")
@@ -51,20 +49,19 @@ class StarWarsClientGroovyTest {
                 .respond(response()
                         .withBody(testData)
                 )
-       mockServerClient
-               .when(request()
-                       .withMethod("GET")
-                       .withPath("/api/starships2")
-               )
-               .respond(response()
-                       .withBody(testData2)
-               )
+        mockServerClient
+                .when(request()
+                        .withMethod("GET")
+                        .withPath("/api/starships2")
+                )
+                .respond(response()
+                        .withBody(testData2)
+                )
 
         List<Starship> allStarships = clientUnderTest.findAllStarships()
 
         assert allStarships.size() == 11
     }
-
 
     @Test
     void "verify call for finding all starships"(){
