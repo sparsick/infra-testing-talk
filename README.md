@@ -1,5 +1,5 @@
 # infra-testing-talk
-You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur - 'Integration testing done right ;)'" that I presented on Magdeburger Developer Days at 21st May 2019.
+You can find here the slides and the sample code of my talk "Testing and Infrastructure'" that I presented on Gr8Conf in Copenhagen at 27th May 2019.
 
 
 ## Simulate Infrastructure in Software Tests
