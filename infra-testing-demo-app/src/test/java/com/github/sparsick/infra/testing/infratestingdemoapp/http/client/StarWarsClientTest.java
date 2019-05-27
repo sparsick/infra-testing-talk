@@ -29,9 +29,9 @@ public class StarWarsClientTest {
     private static String starship2TestDataTemplate;
 
     @Rule
-    public MockServerRule mockServerRule = new MockServerRule(this);
+    public MockServerRule mockServerRule = new MockServerRule(this, false);
 
-    private MockServerClient mockServerClient = mockServerRule.getClient();
+    private MockServerClient mockServerClient;
     private StarWarsClient clientUnderTest = new StarWarsClient("http","localhost", mockServerRule.getPort());
     private String testData;
     private String testData2;
@@ -59,7 +59,7 @@ public class StarWarsClientTest {
 
     @Test
     public void findAllStarships() {
-       mockServerClient
+        mockServerClient
                 .when(request()
                         .withMethod("GET")
                         .withPath("/api/starships")

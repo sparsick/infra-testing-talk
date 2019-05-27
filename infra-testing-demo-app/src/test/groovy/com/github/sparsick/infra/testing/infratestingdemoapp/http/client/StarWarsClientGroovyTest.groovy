@@ -20,9 +20,9 @@ class StarWarsClientGroovyTest {
     private String testData2
 
     @Rule
-    public MockServerRule mockServerRule = new MockServerRule(this)
+    public MockServerRule mockServerRule = new MockServerRule(this, false)
 
-    private MockServerClient mockServerClient = mockServerRule.getClient()
+    private MockServerClient mockServerClient
     private StarWarsClient clientUnderTest = new StarWarsClient("http","localhost", mockServerRule.getPort())
 
     @BeforeClass
