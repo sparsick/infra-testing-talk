@@ -5,13 +5,12 @@ import com.zaxxer.hikari.HikariDataSource
 import org.flywaydb.core.Flyway
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.spock.Testcontainers
-import spock.lang.Shared
 import spock.lang.Specification
 
 @Testcontainers
 class PersonRepositorySpockTest extends Specification {
 
-    @Shared
+
     private PostgreSQLContainer postgres = new PostgreSQLContainer();
 
     private PersonRepository repositoryUnderTest;
