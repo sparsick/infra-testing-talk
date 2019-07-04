@@ -1,5 +1,5 @@
 # infra-testing-talk
-You can find here the slides and the sample code of my talk "Testing and Infrastructure'" that I presented on Java Forum Malmö at 28th May 2019.
+You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur'" that I presented on Java Forum Stuttgart at 04th July 2019.
 
 
 ## Simulate Infrastructure in Software Tests
