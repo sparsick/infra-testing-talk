@@ -1,0 +1,7 @@
+language: java
+jdk:
+  - openjdk11
+before_script: cd infra-testing-demo-app
+notifications:
+  email:
+    on_success: always
