@@ -60,7 +60,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.5</version>
+            <version>42.2.6</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -105,7 +105,7 @@
         <dependency>
             <groupId>org.mock-server</groupId>
             <artifactId>mockserver-netty</artifactId>
-            <version>5.5.4</version>
+            <version>5.6.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -205,7 +205,7 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>1.7.0</version>
+                <version>1.7.1</version>
                 <executions>
                     <execution>
                         <goals>
