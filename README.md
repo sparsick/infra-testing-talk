@@ -9,6 +9,7 @@ Following test libraries are used:
 - JUnit 5.4.2 including JUnit 4 (JUnit Jupiter Vintage)
 - AssertJ 3.12.2
 - MockServer 5.4.1
+- Wiremock 2.23.2
 - Greenmail 1.5.10
 - Testcontainers 1.11.3
 - REST assured 4.0.0
@@ -18,7 +19,7 @@ Following test libraries are used:
 The test class `StarWarsMovieControllerITest` shows how to test own REST API with Spring MVC and REST assured.
 
 ### Mock REST dependencies
-The test class `StarWarsClientTest` and `StarWarsClientGroovyTest` show how to mock dependencies to a REST API with MockServer.
+The test classes `StarWarsClientMockserverTest`, `StarWarsClientWiremockTest` and `StarWarsClientMockserverGroovyTest` show how to mock dependencies to a REST API with MockServer or Wiremock.
 
 ### Testing interaction with E-Mails
 The test class `MailClientTest` shows how to test interaction with e-mails (currently only sending) with Greenmail
