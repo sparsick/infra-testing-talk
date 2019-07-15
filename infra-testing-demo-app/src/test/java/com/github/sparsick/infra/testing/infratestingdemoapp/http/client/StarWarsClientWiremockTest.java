@@ -31,7 +31,7 @@ public class StarWarsClientWiremockTest {
     private static String starship2TestDataTemplate;
 
     @ClassRule
-    public static WireMockClassRule serviceMock = new WireMockClassRule(options().port(DYNAMIC_PORT));
+    public static WireMockClassRule serviceMock = new WireMockClassRule(options().dynamicPort());
 
     private StarWarsClient clientUnderTest = new StarWarsClient("http", "localhost", serviceMock.port());
     private String testData;
@@ -51,7 +51,7 @@ public class StarWarsClientWiremockTest {
 
     @Before
     public void setUp() throws Exception {
-        Map binding = new HashMap();
+        Map<String, String> binding = new HashMap<>();
         binding.put("baseUrl","localhost:" + serviceMock.port());
         testData = new SimpleTemplateEngine().createTemplate(starship1TestDataTemplate).make(binding).toString();
         testData2 = new SimpleTemplateEngine().createTemplate(starship2TestDataTemplate).make(binding).toString();
