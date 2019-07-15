@@ -12,7 +12,7 @@ import org.mockserver.verify.VerificationTimes
 import static org.mockserver.model.HttpRequest.request
 import static org.mockserver.model.HttpResponse.response
 
-class StarWarsClientGroovyTest {
+class StarWarsClientMockserverGroovyTest {
 
     private static String starship1TestDataTemplate
     private static String starship2TestDataTemplate

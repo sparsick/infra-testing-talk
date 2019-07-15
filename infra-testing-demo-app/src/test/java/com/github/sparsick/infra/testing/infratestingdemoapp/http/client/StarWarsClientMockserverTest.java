@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
-public class StarWarsClientTest {
+public class StarWarsClientMockserverTest {
 
     private static String starship1TestDataTemplate;
     private static String starship2TestDataTemplate;

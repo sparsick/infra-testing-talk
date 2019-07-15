@@ -1,14 +1,15 @@
 # infra-testing-talk
-You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur'" that I presented on Java Forum Stuttgart at 04th July 2019.
+You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur" that I presented on Agile QA Cologne at 16th July 2019.
 
 
 ## Simulate Infrastructure in Software Tests
 All code sample for simulating infrastucture in software tests are in `infra-testing-demo-app`.
-The code samples are tested with Java 11, embedded in a Spring Boot 2.1.5 skeleton.
+The code samples are tested with Java 11, embedded in a Spring Boot 2.1.6 skeleton.
 Following test libraries are used:
 - JUnit 5.4.2 including JUnit 4 (JUnit Jupiter Vintage)
 - AssertJ 3.12.2
 - MockServer 5.4.1
+- Wiremock 2.23.2
 - Greenmail 1.5.10
 - Testcontainers 1.11.3
 - REST assured 4.0.0
@@ -18,7 +19,7 @@ Following test libraries are used:
 The test class `StarWarsMovieControllerITest` shows how to test own REST API with Spring MVC and REST assured.
 
 ### Mock REST dependencies
-The test class `StarWarsClientTest` and `StarWarsClientGroovyTest` show how to mock dependencies to a REST API with MockServer.
+The test classes `StarWarsClientMockserverTest`, `StarWarsClientWiremockTest` and `StarWarsClientMockserverGroovyTest` show how to mock dependencies to a REST API with MockServer or Wiremock.
 
 ### Testing interaction with E-Mails
 The test class `MailClientTest` shows how to test interaction with e-mails (currently only sending) with Greenmail
