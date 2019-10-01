@@ -22,7 +22,7 @@
 
 	<properties>
 		<junit.jupiter.version>5.5.1</junit.jupiter.version>
-        <testcontainers.version>1.12.0</testcontainers.version>
+        <testcontainers.version>1.12.2</testcontainers.version>
         <rest-assured.version>4.0.0</rest-assured.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
