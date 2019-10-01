@@ -1,7 +1,7 @@
-[application-server]
+[application_server]
 192.168.33.10
 
-[database-server]
+[database_server]
 192.168.33.10
 
 [all:vars]

@@ -30,23 +30,23 @@ Test class `DBMigrationJUnit4/5Test` shows how to test the database migration sc
 
 ## Infrastructure as Code Testing
 All code samples for infrastructure as code testing are in `infrastructure-as-code-testing`.
-The code samples are tested with Bash, Ansible 2.7.10  and Docker 18.09.4.
+The code samples are tested with Bash, Ansible 2.8.5  and Docker 19.03.2.
 
 Following test tools are used:
 - Shellcheck 0.4.6
 - Ansible-lint 4.1.0
-- yamllint 1.10.0
+- yamllint 1.15.0
 - Serverspec 2.41.3
-- Testinfra 2.1.0
-- hadolint 1.16.3
+- Testinfra 3.2.0
+- hadolint 1.17.2
 - Container Structure Test 1.8.0
+- Molecule 3.0a4
 
 ### Setup Test Infrastructure
-I prepare some Vagrantfiles for the setup of the test infrastructure if necessary. The only prerequires are that you have to install VirtualBox and Vagrant on your machine. It is tested with Vagrant 2.2.4 . Then follow these steps:
+I prepare some Vagrantfiles for the setup of the test infrastructure if necessary. The only prerequires are that you have to install VirtualBox and Vagrant on your machine. It is tested with Vagrant 2.2.5 . Then follow these steps:
 
 1. Open a CLI and go to the location of the file `Vagrantfile`.
 2. Call `vagrant up`. Vagrant will download the necessary image for VirtualBox. That will take some times.
-3. Then copy your public key for the authentication that is needed for a SSH login. A setup SSH script exists for this: `./setupSSH.sh`
 
 Hint: Public and private keys can be generated with the following command: `ssh-keygen`
 

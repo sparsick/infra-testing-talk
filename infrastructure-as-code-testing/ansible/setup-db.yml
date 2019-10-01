@@ -1,14 +1,14 @@
-- hosts: database-server
+- hosts: database_server
   become: yes
   become_method: sudo
-    
-  tasks:    
+
+  tasks:
     - name: install mysql db
       apt: name=mysql-server state=present
-      
+
     - name: installs python-mysqldb
       apt: name=python-mysqldb state=present
-  
+
     - name: start mysql
       service: name=mysql state=started
 
@@ -18,11 +18,10 @@
         state=present
         regexp=^bind-address(.*)
       notify: restart mysql
-      
+
     - name: creates db user dba
-      mysql_user: name=dba password=g3h31m priv=*.*:ALL,GRANT state=present host=% 
-      
+      mysql_user: name=dba password=g3h31m priv=*.*:ALL,GRANT state=present host=%
+
   handlers:
      - name: restart mysql
-       service: name=mysql state=restarted 
- 
+       service: name=mysql state=restarted
