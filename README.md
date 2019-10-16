@@ -1,5 +1,5 @@
 # infra-testing-talk
-You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur" that I presented on JUG Paderborn at 8th October 2019.
+You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur" that I presented on BaselOne at 17th October 2019.
 
 
 ## Simulate Infrastructure in Software Tests
