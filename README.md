@@ -1,5 +1,5 @@
 # infra-testing-talk
-You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur" that I presented on W-JAX in Munich at 6th November 2019.
+You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur" that I presented at majug in Mannheim at 14th November 2019.
 
 
 ## Simulate Infrastructure in Software Tests
