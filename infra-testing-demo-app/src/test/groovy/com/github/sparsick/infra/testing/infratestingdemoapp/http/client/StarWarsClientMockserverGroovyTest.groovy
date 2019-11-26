@@ -1,17 +1,18 @@
 package com.github.sparsick.infra.testing.infratestingdemoapp.http.client
 
 import groovy.text.SimpleTemplateEngine
-import org.junit.Before
-import org.junit.BeforeClass
-import org.junit.Rule
-import org.junit.Test
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockserver.client.MockServerClient
-import org.mockserver.junit.MockServerRule
+import org.mockserver.junit.jupiter.MockServerExtension
 import org.mockserver.verify.VerificationTimes
 
 import static org.mockserver.model.HttpRequest.request
 import static org.mockserver.model.HttpResponse.response
 
+@ExtendWith(MockServerExtension.class)
 class StarWarsClientMockserverGroovyTest {
 
     private static String starship1TestDataTemplate
@@ -19,22 +20,24 @@ class StarWarsClientMockserverGroovyTest {
     private String testData
     private String testData2
 
-    @Rule
-    public MockServerRule mockServerRule = new MockServerRule(this, false)
-
     private MockServerClient mockServerClient
-    private StarWarsClient clientUnderTest = new StarWarsClient("http","localhost", mockServerRule.getPort())
+    private StarWarsClient clientUnderTest
 
-    @BeforeClass
+    StarWarsClientMockserverGroovyTest(MockServerClient mockServerClient) {
+        this.mockServerClient = mockServerClient
+    }
+
+    @BeforeAll
     static void "setup test data"()  {
         starship1TestDataTemplate = StarWarsClient.class.getResourceAsStream("/starwars-testdata/starship1.json").text
         starship2TestDataTemplate = StarWarsClient.class.getResourceAsStream("/starwars-testdata/starship2.json").text
     }
 
-    @Before
+    @BeforeEach
     void "setup"() {
+        clientUnderTest = new StarWarsClient("http","localhost", mockServerClient.remoteAddress().port)
         Map binding = new HashMap()
-        binding.put("baseUrl","localhost:" + mockServerRule.port)
+        binding.put("baseUrl","localhost:" + mockServerClient.remoteAddress().port)
         testData = new SimpleTemplateEngine().createTemplate(starship1TestDataTemplate).make(binding).toString()
         testData2 = new SimpleTemplateEngine().createTemplate(starship2TestDataTemplate).make(binding).toString()
     }

@@ -3,12 +3,13 @@ package com.github.sparsick.infra.testing.infratestingdemoapp.http.client;
 
 import groovy.text.SimpleTemplateEngine;
 import org.apache.commons.io.IOUtils;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockserver.client.MockServerClient;
-import org.mockserver.junit.MockServerRule;
+import org.mockserver.junit.jupiter.MockServerExtension;
 import org.mockserver.verify.VerificationTimes;
 import org.springframework.core.io.ClassPathResource;
 
@@ -23,22 +24,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
+@ExtendWith(MockServerExtension.class)
 public class StarWarsClientMockserverTest {
 
     private static String starship1TestDataTemplate;
     private static String starship2TestDataTemplate;
 
-    @Rule
-    public MockServerRule mockServerRule = new MockServerRule(this, false);
-
     private MockServerClient mockServerClient;
-    private StarWarsClient clientUnderTest = new StarWarsClient("http","localhost", mockServerRule.getPort());
+    private StarWarsClient clientUnderTest;
     private String testData;
     private String testData2;
 
+    public StarWarsClientMockserverTest(MockServerClient mockServerClient) {
+        this.mockServerClient = mockServerClient;
+    }
 
-    @BeforeClass
-    public static void testDataSetup() throws IOException {
+    @BeforeAll
+    static void testDataSetup() throws IOException {
         try (InputStream inputStream = new ClassPathResource("starwars-testdata/starship1.json").getInputStream()) {
             starship1TestDataTemplate = IOUtils.toString(inputStream, Charset.defaultCharset());
         }
@@ -48,17 +50,18 @@ public class StarWarsClientMockserverTest {
         }
     }
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
+        clientUnderTest = new StarWarsClient("http","localhost", mockServerClient.remoteAddress().getPort());
         Map binding = new HashMap();
-        binding.put("baseUrl","localhost:" + mockServerRule.getPort());
+        binding.put("baseUrl","localhost:" + mockServerClient.remoteAddress().getPort());
         testData = new SimpleTemplateEngine().createTemplate(starship1TestDataTemplate).make(binding).toString();
         testData2 = new SimpleTemplateEngine().createTemplate(starship2TestDataTemplate).make(binding).toString();
     }
 
 
     @Test
-    public void findAllStarships() {
+    void findAllStarships() {
         mockServerClient
                 .when(request()
                         .withMethod("GET")
@@ -83,7 +86,7 @@ public class StarWarsClientMockserverTest {
 
 
     @Test
-    public void verifyFindAllStarshipsRequest(){
+    void verifyFindAllStarshipsRequest(){
         mockServerClient
                 .when(request()
                         .withMethod("GET")
