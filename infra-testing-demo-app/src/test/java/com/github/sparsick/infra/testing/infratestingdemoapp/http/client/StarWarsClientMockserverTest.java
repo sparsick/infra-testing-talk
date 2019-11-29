@@ -4,6 +4,7 @@ package com.github.sparsick.infra.testing.infratestingdemoapp.http.client;
 import groovy.text.SimpleTemplateEngine;
 import org.apache.commons.io.IOUtils;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,8 +33,8 @@ public class StarWarsClientMockserverTest {
 
     private MockServerClient mockServerClient;
     private StarWarsClient clientUnderTest;
-    private String testData;
-    private String testData2;
+    private String starshipTestData;
+    private String starshipTestData2;
 
     public StarWarsClientMockserverTest(MockServerClient mockServerClient) {
         this.mockServerClient = mockServerClient;
@@ -52,11 +53,16 @@ public class StarWarsClientMockserverTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        clientUnderTest = new StarWarsClient("http","localhost", mockServerClient.remoteAddress().getPort());
+        clientUnderTest = new StarWarsClient("http://localhost:" + mockServerClient.remoteAddress().getPort());
         Map binding = new HashMap();
         binding.put("baseUrl","localhost:" + mockServerClient.remoteAddress().getPort());
-        testData = new SimpleTemplateEngine().createTemplate(starship1TestDataTemplate).make(binding).toString();
-        testData2 = new SimpleTemplateEngine().createTemplate(starship2TestDataTemplate).make(binding).toString();
+        starshipTestData = new SimpleTemplateEngine().createTemplate(starship1TestDataTemplate).make(binding).toString();
+        starshipTestData2 = new SimpleTemplateEngine().createTemplate(starship2TestDataTemplate).make(binding).toString();
+    }
+
+    @AfterEach
+    void cleanUp(){
+        mockServerClient.reset();
     }
 
 
@@ -68,7 +74,7 @@ public class StarWarsClientMockserverTest {
                         .withPath("/api/starships")
                 )
                 .respond(response()
-                        .withBody(testData)
+                        .withBody(starshipTestData)
                 );
        mockServerClient
                .when(request()
@@ -76,7 +82,7 @@ public class StarWarsClientMockserverTest {
                        .withPath("/api/starships2")
                )
                .respond(response()
-                       .withBody(testData2)
+                       .withBody(starshipTestData2)
                );
 
         List<Starship> allStarships = clientUnderTest.findAllStarships();
@@ -93,7 +99,7 @@ public class StarWarsClientMockserverTest {
                         .withPath("/api/starships")
                 )
                 .respond(response()
-                        .withBody(testData)
+                        .withBody(starshipTestData)
                 );
         mockServerClient
                 .when(request()
@@ -101,7 +107,7 @@ public class StarWarsClientMockserverTest {
                         .withPath("/api/starships2")
                 )
                 .respond(response()
-                        .withBody(testData2)
+                        .withBody(starshipTestData2)
                 );
 
         List<Starship> allStarships = clientUnderTest.findAllStarships();
@@ -118,6 +124,65 @@ public class StarWarsClientMockserverTest {
                                 .withMethod("GET")
                                 .withPath("/api/starships2"),
                         VerificationTimes.once());
+    }
+
+    @Test
+    void findAllCharacter() throws IOException {
+        String characterTestData;
+        try (InputStream inputStream = new ClassPathResource("starwars-testdata/character.json").getInputStream()) {
+            characterTestData = IOUtils.toString(inputStream, Charset.defaultCharset());
+        }
+        mockServerClient
+                .when(request()
+                        .withMethod("GET")
+                        .withPath("/api/people")
+                )
+                .respond(response()
+                        .withBody(characterTestData)
+                );
+
+        List<Character> characters = clientUnderTest.findAllCharacter();
+
+        assertThat(characters).hasSize(10);
+    }
+
+    @Test
+    void findAllCharacter_errorcase() throws Exception {
+        String characterTestData = loadCharacterTestData();
+        mockServerClient
+                .when(request()
+                        .withMethod("GET")
+                        .withPath("/api/people")
+                )
+                .respond(response()
+                        .withStatusCode(200)
+                        .withBody(characterTestData)
+                );
+
+        mockServerClient
+                .when(request()
+                        .withMethod("GET")
+                        .withPath("/api/people2")
+                )
+                .respond(response()
+                        .withStatusCode(404)
+                );
+
+        List<Character> characters = clientUnderTest.findAllCharacter();
+
+        assertThat(characters).hasSize(10);
+    }
+
+    private String loadCharacterTestData() throws IOException, ClassNotFoundException {
+        String characterTestData;
+        try (InputStream inputStream = new ClassPathResource("starwars-testdata/character-errorcase.json").getInputStream()) {
+            characterTestData = IOUtils.toString(inputStream, Charset.defaultCharset());
+        }
+
+        Map binding = new HashMap();
+        binding.put("baseUrl","localhost:" + mockServerClient.remoteAddress().getPort());
+        characterTestData = new SimpleTemplateEngine().createTemplate(characterTestData).make(binding).toString();
+        return characterTestData;
     }
 
 }

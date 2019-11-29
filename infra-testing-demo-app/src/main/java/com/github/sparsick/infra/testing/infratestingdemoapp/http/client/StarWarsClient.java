@@ -2,6 +2,8 @@ package com.github.sparsick.infra.testing.infratestingdemoapp.http.client;
 
 import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.MalformedURLException;
@@ -16,19 +18,10 @@ public class StarWarsClient {
     private final RestTemplate restTemplate;
     private final String baseUrl;
 
-    public StarWarsClient(String protocol, String hostName, int port) {
+    public StarWarsClient(String baseUrl) {
         this.restTemplate = new RestTemplateBuilder().build();
         try {
-            this.baseUrl = new URL(protocol, hostName, port, "").toString();
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public StarWarsClient(String protocol, String hostName) {
-        this.restTemplate = new RestTemplateBuilder().build();
-        try {
-            this.baseUrl = new URL(protocol, hostName,"").toString();
+            this.baseUrl = new URL(baseUrl).toString();
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -47,5 +40,26 @@ public class StarWarsClient {
         }
         while (nextPageUrl != null);
         return starships;
+    }
+
+    public List<Character> findAllCharacter() {
+        List<Character> characters = new ArrayList<>();
+        String nextPageUrl = baseUrl + "/api/people";
+        do {
+            try {
+                String forObject = restTemplate.getForObject(nextPageUrl, String.class);
+                Map<String, Object> jsonMap = new GsonJsonParser().parseMap(forObject);
+                nextPageUrl = (String) jsonMap.get("next");
+                for (Map result : (List<Map>) jsonMap.get("results")) {
+                    characters.add(Character.from(result));
+                }
+            } catch (HttpClientErrorException.NotFound e) {
+                // log error and finished grepping
+                nextPageUrl = null;
+            }
+
+        }
+        while (nextPageUrl != null);
+        return characters;
     }
 }

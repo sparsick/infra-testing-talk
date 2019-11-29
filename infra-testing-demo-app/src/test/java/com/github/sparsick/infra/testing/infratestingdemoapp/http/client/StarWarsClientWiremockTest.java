@@ -32,7 +32,7 @@ public class StarWarsClientWiremockTest {
     @ClassRule
     public static WireMockClassRule serviceMock = new WireMockClassRule(options().dynamicPort());
 
-    private StarWarsClient clientUnderTest = new StarWarsClient("http", "localhost", serviceMock.port());
+    private StarWarsClient clientUnderTest = new StarWarsClient("http://localhost:" + serviceMock.port());
     private String testData;
     private String testData2;
 
