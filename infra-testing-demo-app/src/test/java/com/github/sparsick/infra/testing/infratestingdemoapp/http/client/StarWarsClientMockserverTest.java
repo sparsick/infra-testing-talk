@@ -174,15 +174,15 @@ public class StarWarsClientMockserverTest {
     }
 
     private String loadTestData(String testdataPath) throws IOException, ClassNotFoundException {
-        String characterTestData;
+        String testData;
         try (InputStream inputStream = new ClassPathResource(testdataPath).getInputStream()) {
-            characterTestData = IOUtils.toString(inputStream, Charset.defaultCharset());
+            testData = IOUtils.toString(inputStream, Charset.defaultCharset());
         }
 
         Map binding = new HashMap();
         binding.put("baseUrl","localhost:" + mockServerClient.remoteAddress().getPort());
-        characterTestData = new SimpleTemplateEngine().createTemplate(characterTestData).make(binding).toString();
-        return characterTestData;
+        testData = new SimpleTemplateEngine().createTemplate(testData).make(binding).toString();
+        return testData;
     }
 
 }
