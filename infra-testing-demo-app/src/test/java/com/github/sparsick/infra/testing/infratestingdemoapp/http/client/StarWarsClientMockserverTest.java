@@ -3,7 +3,6 @@ package com.github.sparsick.infra.testing.infratestingdemoapp.http.client;
 
 import groovy.text.SimpleTemplateEngine;
 import org.apache.commons.io.IOUtils;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -148,7 +147,7 @@ public class StarWarsClientMockserverTest {
 
     @Test
     void findAllCharacter_errorcase() throws Exception {
-        String characterTestData = loadCharacterTestData();
+        String characterTestData = loadTestData("starwars-testdata/character-errorcase.json");
         mockServerClient
                 .when(request()
                         .withMethod("GET")
@@ -173,9 +172,31 @@ public class StarWarsClientMockserverTest {
         assertThat(characters).hasSize(10);
     }
 
-    private String loadCharacterTestData() throws IOException, ClassNotFoundException {
+    @Test
+    void findCharacterByName() throws Exception {
+        String characterTestData = loadTestData("starwars-testdata/find-character.json");
+        String searchByName = "Skywalker";
+        mockServerClient
+                .when(request()
+                        .withMethod("GET")
+                        .withPath("/api/people/")
+                        .withQueryStringParameter("search", searchByName)
+                )
+                .respond(response()
+                        .withStatusCode(200)
+                        .withBody(characterTestData)
+                );
+
+
+
+        List<Character> characters = clientUnderTest.findCharactersByName(searchByName);
+
+        assertThat(characters).hasSize(3);
+    }
+
+    private String loadTestData(String testdataPath) throws IOException, ClassNotFoundException {
         String characterTestData;
-        try (InputStream inputStream = new ClassPathResource("starwars-testdata/character-errorcase.json").getInputStream()) {
+        try (InputStream inputStream = new ClassPathResource(testdataPath).getInputStream()) {
             characterTestData = IOUtils.toString(inputStream, Charset.defaultCharset());
         }
 

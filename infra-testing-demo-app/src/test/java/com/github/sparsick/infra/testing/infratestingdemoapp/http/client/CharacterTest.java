@@ -30,7 +30,7 @@ class CharacterTest {
         Character character = new Character();
         character.setName("Luke Skywalker");
         character.setHeight(172);
-        character.setMass(77);
+        character.setMass("77");
         character.setHairColor("blond");
         character.setSkinColor("fair");
         character.setEyeColor("blue");

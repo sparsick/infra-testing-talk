@@ -62,4 +62,25 @@ public class StarWarsClient {
         while (nextPageUrl != null);
         return characters;
     }
+
+    public List<Character> findCharactersByName(String name) {
+        List<Character> characters = new ArrayList<>();
+        String nextPageUrl = baseUrl + "/api/people/?search=" + name;
+        do {
+            try {
+                String forObject = restTemplate.getForObject(nextPageUrl, String.class);
+                Map<String, Object> jsonMap = new GsonJsonParser().parseMap(forObject);
+                nextPageUrl = (String) jsonMap.get("next");
+                for (Map result : (List<Map>) jsonMap.get("results")) {
+                    characters.add(Character.from(result));
+                }
+            } catch (HttpClientErrorException.NotFound e) {
+                // log error and finished grepping
+                nextPageUrl = null;
+            }
+
+        }
+        while (nextPageUrl != null);
+        return characters;
+    }
 }

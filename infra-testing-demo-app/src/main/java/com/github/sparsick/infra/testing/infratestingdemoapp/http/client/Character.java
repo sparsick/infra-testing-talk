@@ -7,7 +7,7 @@ public class Character {
 
     private String name;
     private int height;
-    private int mass;
+    private String mass;
     private String hairColor;
     private String skinColor;
     private String eyeColor;
@@ -19,7 +19,7 @@ public class Character {
         Character character = new Character();
         character.name = (String) map.get("name");
         character.height = Integer.parseInt((String) map.get("height"));
-        character.mass = Integer.parseInt((String) map.get("mass"));
+        character.mass = (String) map.get("mass");
         character.hairColor = (String) map.get("hair_color");
         character.skinColor = (String) map.get("skin_color");
         character.eyeColor = (String) map.get("eye_color");
@@ -44,11 +44,11 @@ public class Character {
         this.height = height;
     }
 
-    public int getMass() {
+    public String getMass() {
         return mass;
     }
 
-    public void setMass(int mass) {
+    public void setMass(String mass) {
         this.mass = mass;
     }
 
