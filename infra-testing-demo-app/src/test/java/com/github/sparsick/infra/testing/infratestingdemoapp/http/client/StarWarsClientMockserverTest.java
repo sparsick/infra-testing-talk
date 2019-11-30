@@ -100,18 +100,8 @@ public class StarWarsClientMockserverTest {
                 .respond(response()
                         .withBody(starshipTestData)
                 );
-        mockServerClient
-                .when(request()
-                        .withMethod("GET")
-                        .withPath("/api/starships2")
-                )
-                .respond(response()
-                        .withBody(starshipTestData2)
-                );
 
-        List<Starship> allStarships = clientUnderTest.findAllStarships();
-
-        assertThat(allStarships).hasSize(11);
+        clientUnderTest.findAllStarships();
 
         mockServerClient
                 .verify(request()
@@ -173,25 +163,14 @@ public class StarWarsClientMockserverTest {
     }
 
     @Test
-    void findCharacterByName() throws Exception {
-        String characterTestData = loadTestData("starwars-testdata/find-character.json");
-        String searchByName = "Skywalker";
+    void findCharacterByName_verifyCalls() {
+        clientUnderTest.findCharactersByName("Skywalker");
+
         mockServerClient
-                .when(request()
-                        .withMethod("GET")
-                        .withPath("/api/people/")
-                        .withQueryStringParameter("search", searchByName)
-                )
-                .respond(response()
-                        .withStatusCode(200)
-                        .withBody(characterTestData)
-                );
-
-
-
-        List<Character> characters = clientUnderTest.findCharactersByName(searchByName);
-
-        assertThat(characters).hasSize(3);
+                .verify(request()
+                                .withMethod("GET")
+                                .withPath("/api/people/"),
+                        VerificationTimes.once());
     }
 
     private String loadTestData(String testdataPath) throws IOException, ClassNotFoundException {

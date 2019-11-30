@@ -14,7 +14,6 @@ import java.util.Map;
 
 public class StarWarsClient {
 
-
     private final RestTemplate restTemplate;
     private final String baseUrl;
 
@@ -31,11 +30,16 @@ public class StarWarsClient {
         List<Starship> starships = new ArrayList<>();
         String nextPageUrl = baseUrl + "/api/starships";
         do {
+            try {
             String forObject = restTemplate.getForObject(nextPageUrl, String.class);
             Map<String, Object> jsonMap = new GsonJsonParser().parseMap(forObject);
             nextPageUrl = (String) jsonMap.get("next");
             for (Map result : (List<Map>) jsonMap.get("results")) {
                 starships.add(Starship.from(result));
+            }
+            } catch (HttpClientErrorException.NotFound e) {
+                // log error and finished grepping
+                nextPageUrl = null;
             }
         }
         while (nextPageUrl != null);
