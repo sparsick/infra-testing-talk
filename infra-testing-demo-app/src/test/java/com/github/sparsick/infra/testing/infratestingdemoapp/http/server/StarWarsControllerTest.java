@@ -7,11 +7,11 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class StarWarsMovieControllerTest {
+class StarWarsControllerTest {
 
     @Test
     void findAllMovies(){
-        StarWarsMovieController controllerUnderTest = new StarWarsMovieController();
+        StarWarsController controllerUnderTest = new StarWarsController();
         List<StarWarsMovie> movies = controllerUnderTest.findAllMovies();
 
         assertThat(movies)
