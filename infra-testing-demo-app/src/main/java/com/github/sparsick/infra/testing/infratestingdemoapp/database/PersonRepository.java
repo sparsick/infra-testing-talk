@@ -21,7 +21,7 @@ public class PersonRepository {
     }
 
     public List<Person> findAllPersons() {
-        return jdbcTemplate.query("Select * from person;", new RowMapper<Person>() {
+        return jdbcTemplate.query("Select * from person;", new RowMapper<>() {
 
             @Override
             public Person mapRow(ResultSet resultSet, int arg1) throws SQLException {
