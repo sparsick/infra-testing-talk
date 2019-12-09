@@ -16,17 +16,21 @@ Following test libraries are used:
 - Spock 1.3
 
 ### Tests against own REST API
-The test class `StarWarsMovieControllerITest` shows how to test own REST API with Spring MVC and REST assured.
+The test class `StarWarsMovieControllerITest` shows how to test own REST API with Spring MVC and REST Assured.
+Test classes `RestAssuredJsonPathTest` and `RestAssuredXmlPathTest` demonstrate REST Assured JsonPath and XmlPath feature.
 
 ### Mock REST dependencies
 The test classes `StarWarsClientMockserverTest`, `StarWarsClientWiremockTest` and `StarWarsClientMockserverGroovyTest` show how to mock dependencies to a REST API with MockServer or Wiremock.
+Test class `StarWarsClientVerifiedFakeTest` shows a sample how to implement a verify fake test.
 
 ### Testing interaction with E-Mails
-The test class `MailClientTest` shows how to test interaction with e-mails (currently only sending) with Greenmail
+The test class `MailClientTest` shows how to test interaction with e-mails with Greenmail
 
 ### Testing interaction with Database
 The test class `PersonRepositoryJUnit4/5/SpockTest`shows how to test the repository logic including the database that is used in production with Testcontainers.
 Test class `DBMigrationJUnit4/5Test` shows how to test the database migration script inside my Maven build.
+Test class `PersonRepositoryJdbcUrlTestContainerTest`shows Testcontainers JDBCUrl feature.
+Test classes `*SinglwtonContainerTests` show how to implement the singlton container pattern.
 
 ## Infrastructure as Code Testing
 All code samples for infrastructure as code testing are in `infrastructure-as-code-testing`.
