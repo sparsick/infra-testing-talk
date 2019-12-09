@@ -21,6 +21,7 @@ public class ActorRepositoryExternalDatabaseTest {
 
     private ActorRepository repositoryUnderTest;
     private DataSource ds;
+    private Flyway flyway;
 
     @BeforeEach
     void setup(){
@@ -30,7 +31,7 @@ public class ActorRepositoryExternalDatabaseTest {
         hikariConfig.setPassword("");
 
         ds = new HikariDataSource(hikariConfig);
-        Flyway flyway = Flyway.configure().dataSource(ds).load();
+        flyway = Flyway.configure().dataSource(ds).load();
         flyway.migrate();
 
         repositoryUnderTest = new ActorRepository(ds);
@@ -39,11 +40,7 @@ public class ActorRepositoryExternalDatabaseTest {
 
     @AfterEach
     void cleanUp(){
-        new JdbcTemplate(ds).update("DROP SCHEMA public CASCADE;\n" +
-                "CREATE SCHEMA public;\n" +
-                "GRANT ALL ON SCHEMA public TO postgres;\n" +
-                "GRANT ALL ON SCHEMA public TO public;\n" +
-                "COMMENT ON SCHEMA public IS 'standard public schema';");
+       flyway.clean();
     }
 
 

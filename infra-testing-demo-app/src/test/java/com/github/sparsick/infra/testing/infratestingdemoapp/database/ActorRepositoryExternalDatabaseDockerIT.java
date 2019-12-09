@@ -5,7 +5,6 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -18,16 +17,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ActorRepositoryExternalDatabaseDockerIT {
     private ActorRepository repositoryUnderTest;
     private DataSource ds;
+    private Flyway flyway;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl("jdbc:postgresql://localhost:" + System.getProperty("postgresql.port") + "/postgres");
         hikariConfig.setUsername("postgres");
         hikariConfig.setPassword("");
 
         ds = new HikariDataSource(hikariConfig);
-        Flyway flyway = Flyway.configure().dataSource(ds).load();
+        flyway = Flyway.configure().dataSource(ds).load();
         flyway.migrate();
 
         repositoryUnderTest = new ActorRepository(ds);
@@ -35,24 +35,20 @@ public class ActorRepositoryExternalDatabaseDockerIT {
     }
 
     @AfterEach
-    void cleanUp(){
-        new JdbcTemplate(ds).update("DROP SCHEMA public CASCADE;\n" +
-                "CREATE SCHEMA public;\n" +
-                "GRANT ALL ON SCHEMA public TO postgres;\n" +
-                "GRANT ALL ON SCHEMA public TO public;\n" +
-                "COMMENT ON SCHEMA public IS 'standard public schema';");
+    void cleanUp() {
+        flyway.clean();
     }
 
 
     @Test
-    void findAllActor(){
+    void findAllActor() {
         List<Actor> allActor = repositoryUnderTest.findAllActor();
 
         assertThat(allActor).hasSize(4);
     }
 
     @Test
-    void saveActor(){
+    void saveActor() {
         repositoryUnderTest.save(new Actor("Kenny", "Baker", "R2-D2"));
 
         Integer result = new JdbcTemplate(ds).queryForObject("Select count(*) from actor where last_name = 'Baker'", Integer.class);

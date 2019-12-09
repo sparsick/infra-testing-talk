@@ -13,20 +13,21 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ActorRepositorySingletonContainerTest extends AbstractPostgresqlBaseTest{
+public class ActorRepositorySingletonContainerTest extends AbstractPostgresqlBaseTest {
 
     private ActorRepository repositoryUnderTest;
     private DataSource ds;
+    private Flyway flyway;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl(POSTGRE_SQL_CONTAINER.getJdbcUrl());
         hikariConfig.setUsername(POSTGRE_SQL_CONTAINER.getUsername());
         hikariConfig.setPassword(POSTGRE_SQL_CONTAINER.getPassword());
 
         ds = new HikariDataSource(hikariConfig);
-        Flyway flyway = Flyway.configure().dataSource(ds).load();
+        flyway = Flyway.configure().dataSource(ds).load();
         flyway.migrate();
 
         repositoryUnderTest = new ActorRepository(ds);
@@ -34,23 +35,20 @@ public class ActorRepositorySingletonContainerTest extends AbstractPostgresqlBas
     }
 
     @AfterEach
-    void cleanUp(){
-        new JdbcTemplate(ds).update("DROP SCHEMA public CASCADE;\n" +
-                "CREATE SCHEMA public;\n" +
-                "GRANT ALL ON SCHEMA public TO public;\n" +
-                "COMMENT ON SCHEMA public IS 'standard public schema';");
+    void cleanUp() {
+        flyway.clean();
     }
 
 
     @Test
-    void findAllActor(){
+    void findAllActor() {
         List<Actor> allActor = repositoryUnderTest.findAllActor();
 
         assertThat(allActor).hasSize(4);
     }
 
     @Test
-    void saveActor(){
+    void saveActor() {
         repositoryUnderTest.save(new Actor("Kenny", "Baker", "R2-D2"));
 
         Integer result = new JdbcTemplate(ds).queryForObject("Select count(*) from actor where last_name = 'Baker'", Integer.class);
