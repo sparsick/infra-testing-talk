@@ -5,7 +5,6 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -14,23 +13,22 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ActorRepositoryJdbcUrlTestContainerTest {
-    private ActorRepository repositoryUnderTest;
-    private DataSource ds;
+public class PersonRepositoryJdbcUrlTestContainerTest {
+    private PersonRepository repositoryUnderTest;
     private Flyway flyway;
 
     @BeforeEach
     void setup(){
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl("jdbc:tc:postgresql:9.6.8:///actordb");
+        hikariConfig.setJdbcUrl("jdbc:tc:postgresql:9.6.8:///persondb");
         hikariConfig.setUsername("postgres");
         hikariConfig.setPassword("");
 
-        ds = new HikariDataSource(hikariConfig);
+        DataSource ds = new HikariDataSource(hikariConfig);
         flyway = Flyway.configure().dataSource(ds).load();
         flyway.migrate();
 
-        repositoryUnderTest = new ActorRepository(ds);
+        repositoryUnderTest = new PersonRepository(ds);
 
     }
 
@@ -41,18 +39,18 @@ public class ActorRepositoryJdbcUrlTestContainerTest {
 
 
     @Test
-    void findAllActor(){
-        List<Actor> allActor = repositoryUnderTest.findAllActor();
+    void saveAndFindAllPerson() {
+        Person person = new Person();
+        person.setFirstName("firstName");
+        person.setLastName("lastName");
+        person.setJobTitle("jobTitle");
 
-        assertThat(allActor).hasSize(4);
-    }
+        repositoryUnderTest.save(person);
 
-    @Test
-    void saveActor(){
-        repositoryUnderTest.save(new Actor("Kenny", "Baker", "R2-D2"));
-
-        Integer result = new JdbcTemplate(ds).queryForObject("Select count(*) from actor where last_name = 'Baker'", Integer.class);
-        assertThat(result).isEqualTo(1);
+        List<Person> persons = repositoryUnderTest.findAllPersons();
+        assertThat(persons).hasSize(1).contains(person);
     }
 
 }
+
+
