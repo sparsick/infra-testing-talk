@@ -1,5 +1,5 @@
 # infra-testing-talk
-You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur" that I presented at IT-Tage in Frankfurt am Main at 10th December 2019.
+You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur" that I presented at JUG Darmstadt at 11th December 2019.
 
 
 ## Simulate Infrastructure in Software Tests
