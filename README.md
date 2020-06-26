@@ -1,5 +1,5 @@
 # infra-testing-talk
-You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur" that I presented at WWRuhr in Essen at 23rd January 2020.
+You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur" that I presented at DevOpsCon Online Edition (remote) at 30th June 2020.
 
 
 ## Simulate Infrastructure in Software Tests
