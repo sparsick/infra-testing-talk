@@ -4,16 +4,16 @@ You can find here the slides and the sample code of my talk "Testen von und mit 
 
 ## Simulate Infrastructure in Software Tests
 All code sample for simulating infrastucture in software tests are in `infra-testing-demo-app`.
-The code samples are tested with Java 11, embedded in a Spring Boot 2.2.2 skeleton.
+The code samples are tested with Java 11 and Groovy 3.0.4 embedded in a Spring Boot 2.3.0 skeleton.
 Following test libraries are used:
-- JUnit 5.5.2 including JUnit 4 (JUnit Jupiter Vintage)
-- AssertJ 3.14.0
-- MockServer 5.8.1
-- Wiremock 2.25.1
+- JUnit 5.6.2 including JUnit 4 (JUnit Jupiter Vintage)
+- AssertJ 3.15.0
+- MockServer 5.10
+- Wiremock 2.26.3
 - Greenmail 1.5.11
-- Testcontainers 1.12.4
-- REST assured 4.1.2
-- Spock 1.3
+- Testcontainers 1.14.3
+- REST assured 4.3.0
+- Spock 2.0-M3
 
 ### Tests against own REST API
 The test class `StarWarsMovieControllerITest` shows how to test own REST API with Spring MVC and REST Assured.
