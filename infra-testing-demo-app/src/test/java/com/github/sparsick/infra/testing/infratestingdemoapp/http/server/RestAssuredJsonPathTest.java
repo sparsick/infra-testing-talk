@@ -1,6 +1,5 @@
 package com.github.sparsick.infra.testing.infratestingdemoapp.http.server;
 
-import io.restassured.path.xml.element.NodeChildren;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;

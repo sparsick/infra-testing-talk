@@ -10,10 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static io.restassured.path.xml.XmlPath.from;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RestAssuredXmlPathTest {

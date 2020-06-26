@@ -1,8 +1,8 @@
 package com.github.sparsick.infra.testing.infratestingdemoapp.http.client;
 
-import org.apache.commons.collections4.map.HashedMap;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,7 +11,7 @@ class CharacterTest {
 
     @Test
     void testConvertJsonMapToCharacter(){
-        Map jsonMap = new HashedMap<>();
+        Map<String, String> jsonMap = new HashMap<>();
         jsonMap.put("name", "Luke Skywalker");
         jsonMap.put("height", "172");
         jsonMap.put("mass", "77");
