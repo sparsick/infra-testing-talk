@@ -3,16 +3,14 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint:
-  name: yamllint
+lint: |
+  yamllint .
+  ansible-lint
+  flake8
 platforms:
   - name: instance
-    image: ubuntu:18.04
+    image: ubuntu:20.04
 provisioner:
   name: ansible
-  lint:
-    name: ansible-lint
 verifier:
   name: testinfra
-  lint:
-    name: flake8

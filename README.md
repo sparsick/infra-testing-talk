@@ -34,20 +34,23 @@ Test classes `*SinglwtonContainerTests` show how to implement the singlton conta
 
 ## Infrastructure as Code Testing
 All code samples for infrastructure as code testing are in `infrastructure-as-code-testing`.
-The code samples are tested with Bash, Ansible 2.8.5  and Docker 19.03.2.
+The code samples are tested with Bash, Ansible 2.9.6  and Docker 19.03.12.
 
 Following test tools are used:
-- Shellcheck 0.4.6
-- Ansible-lint 4.1.0
-- yamllint 1.15.0
-- Serverspec 2.41.3
-- Testinfra 3.2.0
-- hadolint 1.17.2
-- Container Structure Test 1.8.0
-- Molecule 3.0a4
+- Shellcheck 0.7.0
+- Ansible-lint 4.2.0
+- yamllint 1.23.0
+- Serverspec 2.41.5
+- Testinfra 5.2.1
+- hadolint 1.18.0
+- Container Structure Test 1.9.0
+- Molecule 3.0.4
 
 ### Setup Test Infrastructure
-I prepare some Vagrantfiles for the setup of the test infrastructure if necessary. The only prerequires are that you have to install VirtualBox and Vagrant on your machine. It is tested with Vagrant 2.2.5 . Then follow these steps:
+I prepare some Vagrantfiles for the setup of the test infrastructure if necessary. 
+The only prerequires are that you have to install VirtualBox and Vagrant on your machine. 
+It is tested with Vagrant 2.2.9 . 
+Then follow these steps:
 
 1. Open a CLI and go to the location of the file `Vagrantfile`.
 2. Call `vagrant up`. Vagrant will download the necessary image for VirtualBox. That will take some times.
