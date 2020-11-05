@@ -1,6 +1,7 @@
 package com.github.sparsick.infra.testing.infratestingdemoapp.mail;
 
 import com.icegreen.greenmail.configuration.GreenMailConfiguration;
+import com.icegreen.greenmail.junit5.GreenMailExtension;
 import com.icegreen.greenmail.user.GreenMailUser;
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.GreenMailUtil;
@@ -10,45 +11,42 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockserver.socket.PortFactory;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.springframework.util.SocketUtils;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class MailClientTest {
 
-    private static int smtpPort = PortFactory.findFreePort();
+    private static int smtpPort = SocketUtils.findAvailableTcpPort();
     private static final ServerSetup SERVER_SETUP_SMTP = new ServerSetup(smtpPort, null, ServerSetup.PROTOCOL_SMTP);
-    private static int pop3Port = PortFactory.findFreePort();
+    private static int pop3Port = SocketUtils.findAvailableTcpPort();
     private static final ServerSetup SERVER_SETUP_POP3 = new ServerSetup(pop3Port, null, ServerSetup.PROTOCOL_POP3);
-    private static GreenMail greenMail;
+
+    @RegisterExtension
+    static GreenMailExtension greenMail = new GreenMailExtension(new ServerSetup[]{
+            SERVER_SETUP_SMTP,
+            SERVER_SETUP_POP3});
+
+
     private MailClient clientUnderTest;
 
     @BeforeAll
     static void setUpAll() {
-        greenMail = new GreenMail(new ServerSetup[]{
-                SERVER_SETUP_SMTP,
-                SERVER_SETUP_POP3});
-        greenMail.withConfiguration(GreenMailConfiguration.aConfig().withUser("user@example.com","test", "xxx")).start();
+        greenMail.withConfiguration(GreenMailConfiguration.aConfig().withUser("user@example.com","test", "xxx"));
     }
 
     @AfterEach
     void cleanUp(){
         greenMail.reset();
-    }
-
-    @AfterAll
-    static void shutdown() {
-        greenMail.stop();
     }
 
     @BeforeEach
