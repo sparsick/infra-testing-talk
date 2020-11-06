@@ -3,10 +3,8 @@ package com.github.sparsick.infra.testing.infratestingdemoapp.mail;
 import com.icegreen.greenmail.configuration.GreenMailConfiguration;
 import com.icegreen.greenmail.junit5.GreenMailExtension;
 import com.icegreen.greenmail.user.GreenMailUser;
-import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.GreenMailUtil;
 import com.icegreen.greenmail.util.ServerSetup;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,10 +24,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class MailClientTest {
 
-    private static int smtpPort = SocketUtils.findAvailableTcpPort();
-    private static final ServerSetup SERVER_SETUP_SMTP = new ServerSetup(smtpPort, null, ServerSetup.PROTOCOL_SMTP);
-    private static int pop3Port = SocketUtils.findAvailableTcpPort();
-    private static final ServerSetup SERVER_SETUP_POP3 = new ServerSetup(pop3Port, null, ServerSetup.PROTOCOL_POP3);
+    private static final ServerSetup SERVER_SETUP_SMTP = new ServerSetup(SocketUtils.findAvailableTcpPort(), null, ServerSetup.PROTOCOL_SMTP);
+    private static final ServerSetup SERVER_SETUP_POP3 = new ServerSetup(SocketUtils.findAvailableTcpPort(), null, ServerSetup.PROTOCOL_POP3);
 
     @RegisterExtension
     static GreenMailExtension greenMail = new GreenMailExtension(new ServerSetup[]{
@@ -51,7 +47,9 @@ class MailClientTest {
 
     @BeforeEach
     void setUp() {
-        Properties properties = createProperties();
+        Properties properties = new Properties();
+        properties = SERVER_SETUP_POP3.configureJavaMailSessionProperties(properties, false);
+        properties = SERVER_SETUP_SMTP.configureJavaMailSessionProperties(properties, false);
         clientUnderTest = new MailClient(properties, "test", "xxx");
     }
 
@@ -81,18 +79,5 @@ class MailClientTest {
         GreenMailUser user = greenMail.setUser("user@example.com","test", "xxx");
         MimeMessage message = GreenMailUtil.createTextEmail("user@example.com", "from@localhost.com", "A subject", "some text", SERVER_SETUP_POP3);
         user.deliver(message);
-    }
-
-    private Properties createProperties() {
-        Properties props = new Properties();
-        props.setProperty("mail.transport.protocol", "smtp");
-        props.setProperty("mail.smtp.port", String.valueOf(smtpPort));
-        props.setProperty("mail.smtp.auth", "true");
-        props.setProperty("mail.smtp.user", "user@example.com");
-        props.setProperty("mail.smtp.host", "localhost");
-        props.setProperty("mail.smtp.from", "user@example.com");
-        props.setProperty("mail.pop3.host", "localhost");
-        props.setProperty("mail.pop3.port", String.valueOf(pop3Port));
-        return props;
     }
 }
