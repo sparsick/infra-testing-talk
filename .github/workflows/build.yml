@@ -1,0 +1,24 @@
+name: MavenBuild
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  openjdk:
+    name: "OpenJDK 11"
+    runs-on: ubuntu-latest
+    container: "maven:3.6.3-jdk-11-slim"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ matrix.jdk }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven-${{ matrix.jdk }}
+      - name: 'Build'
+        run: cd infra-testing-demo-app; mvn -V --no-transfer-progress clean verify --fail-at-end
