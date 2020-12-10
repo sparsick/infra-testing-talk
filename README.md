@@ -1,4 +1,7 @@
 # infra-testing-talk
+
+![Build Status](https://github.com/sparsick/infra-testing-talk/workflows/MavenBuild/badge.svg)
+
 You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur" that I presented at DevOpsCon Berlin (remote) at 13rd October 2020.
 
 
