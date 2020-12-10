@@ -4,7 +4,7 @@ You can find here the slides and the sample code of my talk "Testen von und mit 
 
 ## Simulate Infrastructure in Software Tests
 All code sample for simulating infrastucture in software tests are in `infra-testing-demo-app`.
-The code samples are tested with Java 11 and Groovy 3.0.5 embedded in a Spring Boot 2.3.0 skeleton.
+The code samples are tested with Java 11 and Groovy 3.0.7 embedded in a Spring Boot 2.3.0 skeleton.
 Following test libraries are used:
 - JUnit 5.6.2 including JUnit 4 (JUnit Jupiter Vintage)
 - AssertJ 3.17.2
