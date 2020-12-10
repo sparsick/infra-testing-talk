@@ -32,7 +32,7 @@ public class ActorRepositoryGenericContainerTest {
     @BeforeEach
     void setup() {
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl("jdbc:postgresql://localhost:" + container.getMappedPort(5432) + "/postgres");
+        hikariConfig.setJdbcUrl("jdbc:postgresql://" + container.getHost() + ":" + container.getMappedPort(5432) + "/postgres");
         hikariConfig.setUsername("postgres");
         hikariConfig.setPassword("");
 
