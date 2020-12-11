@@ -22,7 +22,7 @@ public class ActorRepositoryExternalDatabaseDockerIT {
     @BeforeEach
     void setup() {
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl("jdbc:postgresql://localhost:" + System.getProperty("postgresql.port") + "/postgres");
+        hikariConfig.setJdbcUrl("jdbc:postgresql://" + System.getProperty("docker.host") + ":" + System.getProperty("postgresql.port") + "/postgres");
         hikariConfig.setUsername("postgres");
         hikariConfig.setPassword("");
 

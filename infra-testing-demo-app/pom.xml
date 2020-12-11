@@ -29,6 +29,7 @@
         <java.version>11</java.version>
         <groovy.version>3.0.7</groovy.version>
         <greenmail.version>1.6.0</greenmail.version>
+        <docker.host>localhost</docker.host>
     </properties>
 
     <dependencies>
@@ -318,6 +319,10 @@
                             <name>postgresql.port</name>
                             <value>${postgresql.port}</value>
                         </property>
+                        <property>
+                            <name>docker.host</name>
+                            <value>${docker.host}</value>
+                        </property>
                     </systemProperties>
                 </configuration>
             </plugin>
@@ -331,7 +336,6 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
                         <configuration>
                             <groups>verifyFake</groups>
                             <systemPropertyVariables>
@@ -342,7 +346,6 @@
                 </plugins>
             </build>
         </profile>
-
     </profiles>
 
 </project>
