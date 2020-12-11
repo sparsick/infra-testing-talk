@@ -21,4 +21,4 @@ jobs:
           key: ${{ runner.os }}-maven-${{ matrix.jdk }}-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven-${{ matrix.jdk }}
       - name: 'Build'
-        run: cd infra-testing-demo-app; mvn -V --no-transfer-progress clean verify --fail-at-end
+        run: cd infra-testing-demo-app; mvn -V --no-transfer-progress clean verify -Ddocker.host=openjdk --fail-at-end
