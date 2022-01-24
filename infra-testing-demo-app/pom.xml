@@ -26,7 +26,7 @@
         <testcontainers.version>1.14.3</testcontainers.version>
         <rest-assured.version>4.3.1</rest-assured.version>
         <mockserver.version>5.11.2</mockserver.version>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <groovy.version>3.0.7</groovy.version>
         <greenmail.version>1.6.0</greenmail.version>
         <docker.host>localhost</docker.host>

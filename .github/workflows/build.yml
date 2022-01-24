@@ -10,9 +10,9 @@ on:
 
 jobs:
   openjdk:
-    name: "OpenJDK 11"
+    name: "OpenJDK 17"
     runs-on: ubuntu-latest
-    container: "maven:3.6.3-jdk-11-slim"
+    container: "maven:3.8.4-openjdk-17-slim"
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
