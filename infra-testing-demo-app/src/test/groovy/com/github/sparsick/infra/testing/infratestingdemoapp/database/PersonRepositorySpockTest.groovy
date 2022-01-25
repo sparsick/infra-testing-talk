@@ -11,7 +11,7 @@ import spock.lang.Specification
 class PersonRepositorySpockTest extends Specification {
 
 
-    private PostgreSQLContainer postgres = new PostgreSQLContainer();
+    private PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:9.6.12");
 
     private PersonRepository repositoryUnderTest;
 

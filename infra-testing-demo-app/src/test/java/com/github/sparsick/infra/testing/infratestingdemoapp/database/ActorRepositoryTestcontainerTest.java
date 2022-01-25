@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ActorRepositoryTestcontainerTest {
 
     @Container
-    private PostgreSQLContainer container = new PostgreSQLContainer();
+    private PostgreSQLContainer container = new PostgreSQLContainer("postgres:9.6.12");
 
     private ActorRepository repositoryUnderTest;
     private DataSource ds;

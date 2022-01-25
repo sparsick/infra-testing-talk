@@ -10,7 +10,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 class DbMigrationTestcontainerJUnit5Test {
     
     @Container
-    private MySQLContainer mysqlDb = new MySQLContainer();
+    private MySQLContainer mysqlDb = new MySQLContainer("mysql:5.7.34");
     
     @Test
     void testDbMigrationFromTheScratch(){
