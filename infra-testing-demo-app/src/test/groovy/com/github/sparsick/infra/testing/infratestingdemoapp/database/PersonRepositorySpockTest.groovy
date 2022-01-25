@@ -42,7 +42,7 @@ class PersonRepositorySpockTest extends Specification {
         List<Person> persons = repositoryUnderTest.findAllPersons()
 
         then:
-        persons.size == 1
+        persons.size() == 1
         persons.contains(person)
     }
 }
