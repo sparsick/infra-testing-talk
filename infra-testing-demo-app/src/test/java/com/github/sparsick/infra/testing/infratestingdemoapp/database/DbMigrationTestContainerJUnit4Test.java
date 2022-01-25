@@ -8,7 +8,7 @@ import org.testcontainers.containers.MySQLContainer;
 public class DbMigrationTestContainerJUnit4Test {
     
     @Rule
-    public MySQLContainer mysqlDb = new MySQLContainer("mysql:5.7.34");
+    public MySQLContainer mysqlDb = new MySQLContainer("mysql:8.0.28");
     
     @Test
     public void testDbMigrationFromTheScratch(){

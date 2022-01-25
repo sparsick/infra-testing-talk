@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ActorRepositoryGenericContainerTest {
 
     @Container
-    private GenericContainer container = new GenericContainer("postgres:12.1")
+    private GenericContainer container = new GenericContainer("postgres:14.1").withEnv("POSTGRES_PASSWORD", "password")
             .withExposedPorts(5432)
             .waitingFor(Wait.forLogMessage(".*database system is ready to accept connections.*\\s", 2));
 
@@ -34,7 +34,7 @@ public class ActorRepositoryGenericContainerTest {
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl("jdbc:postgresql://" + container.getHost() + ":" + container.getMappedPort(5432) + "/postgres");
         hikariConfig.setUsername("postgres");
-        hikariConfig.setPassword("");
+        hikariConfig.setPassword("password");
 
         ds = new HikariDataSource(hikariConfig);
         flyway = Flyway.configure().dataSource(ds).load();

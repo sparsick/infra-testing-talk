@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class PersonRepositoryTestcontainerJUnit5Test {
 
     @Container
-    private PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:9.6.12");
+    private PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:14.1");
 
     private PersonRepository repositoryUnderTest;
 

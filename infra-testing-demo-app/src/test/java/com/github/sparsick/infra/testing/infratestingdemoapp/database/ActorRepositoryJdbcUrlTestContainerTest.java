@@ -22,7 +22,7 @@ public class ActorRepositoryJdbcUrlTestContainerTest {
     @BeforeEach
     void setup(){
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl("jdbc:tc:postgresql:9.6.8:///actordb");
+        hikariConfig.setJdbcUrl("jdbc:tc:postgresql:14.1:///actordb");
         hikariConfig.setUsername("postgres");
         hikariConfig.setPassword("");
 
