@@ -29,7 +29,7 @@
         <java.version>17</java.version>
         <groovy.version>3.0.9</groovy.version>
         <greenmail.version>1.6.5</greenmail.version>
-<!--        <docker.host>localhost</docker.host>-->
+        <docker.hostname>localhost</docker.hostname>
     </properties>
 
     <dependencies>
@@ -308,7 +308,7 @@
                         </property>
                         <property>
                             <name>docker.host</name>
-                            <value>${docker.host}</value>
+                            <value>${docker.hostname}</value>
                         </property>
                     </systemProperties>
                 </configuration>
