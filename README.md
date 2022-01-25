@@ -2,21 +2,21 @@
 
 ![Build Status](https://github.com/sparsick/infra-testing-talk/workflows/MavenBuild/badge.svg)
 
-You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur" that I presented at DevOpsCon Berlin (remote) at 13rd October 2020.
+You can find here the slides and the sample code of my talk "Testen von und mit Infrastruktur".
 
 
 ## Simulate Infrastructure in Software Tests
 All code sample for simulating infrastucture in software tests are in `infra-testing-demo-app`.
-The code samples are tested with Java 11 and Groovy 3.0.7 embedded in a Spring Boot 2.3.0 skeleton.
+The code samples are tested with Java 17 and Groovy 3.0.9 embedded in a Spring Boot 2.6.3 skeleton.
 Following test libraries are used:
-- JUnit 5.6.2 including JUnit 4 (JUnit Jupiter Vintage)
-- AssertJ 3.17.2
-- MockServer 5.11.1
+- JUnit 5.8.2 including JUnit 4 (JUnit Jupiter Vintage)
+- AssertJ 3.21.0
+- MockServer 5.11.2
 - Wiremock 2.27.2
-- Greenmail 1.6.0
+- Greenmail 1.6.5
 - Testcontainers 1.14.3
 - REST assured 4.3.1
-- Spock 2.0-M3
+- Spock 2.0
 
 ### Tests against own REST API
 The test class `StarWarsMovieControllerITest` shows how to test own REST API with Spring MVC and REST Assured.
@@ -50,9 +50,9 @@ Following test tools are used:
 - Molecule 3.0.4
 
 ### Setup Test Infrastructure
-I prepare some Vagrantfiles for the setup of the test infrastructure if necessary. 
-The only prerequires are that you have to install VirtualBox and Vagrant on your machine. 
-It is tested with Vagrant 2.2.9 . 
+I prepare some Vagrantfiles for the setup of the test infrastructure if necessary.
+The only prerequires are that you have to install VirtualBox and Vagrant on your machine.
+It is tested with Vagrant 2.2.9 .
 Then follow these steps:
 
 1. Open a CLI and go to the location of the file `Vagrantfile`.
