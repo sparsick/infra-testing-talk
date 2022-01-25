@@ -1,6 +1,5 @@
 package com.github.sparsick.infra.testing.infratestingdemoapp.http.client;
 
-import com.github.sparsick.infra.testing.infratestingdemoapp.http.client.Starship;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -13,7 +12,7 @@ class StarshipTest {
 
     @Test
     void convertFromJsonMap(){
-        Map jsonMap = new HashMap();
+        Map<String, String> jsonMap = new HashMap<>();
         jsonMap.put("name", "Executor");
         jsonMap.put("model", "Executor-class star dreadnought");
         jsonMap.put("cost_in_credits", "1143350000");
