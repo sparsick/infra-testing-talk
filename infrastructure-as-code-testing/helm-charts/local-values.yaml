@@ -1,0 +1,14 @@
+# values file for local deployments on a minikube
+
+livenessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 60
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 60
+
+ingress:
+#  value muss in /etc/hosts mit der IP vom Minikube Cluster eingetragen werden
+  host: spring-boot-demo.local

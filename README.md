@@ -48,6 +48,7 @@ Following test tools are used:
 - hadolint 1.18.0
 - Container Structure Test 1.9.0
 - Molecule 3.0.4
+- terratest 0.35.3
 
 ### Setup Test Infrastructure
 I prepare some Vagrantfiles for the setup of the test infrastructure if necessary.
@@ -100,4 +101,45 @@ docker build -t sparsick/tomcat9 -f tomcat.df .
 - Running the Container Structure Tests (prerequisite Docker image is built before):
 ```
 container-structure-test test --image sparsick/tomcat9:latest --config tomcat-test.yaml
+```
+### Helm Charts
+The code samples infrastructure-as-code-testing/helm-charts are tested with Helm Chart 3.8.1 and Minikube 1.25.2 (uses Kubernetes )
+
+#### Setup Test Infrastructure
+```shell
+cd infrastructure-as-code-testing/helm-charts
+minikube start --addons=ingress
+helm upgrade -i spring-boot-demo-instance spring-boot-demo -f local-values.yaml
+```
+
+Call `minikube ip` to find out the IP address of your Minikube cluster and add it in your `/etc/hosts`
+
+```shell
+// /etc/hosts
+192.168.49.2 spring-boot-demo.local
+```
+Then you can see the application in your browser with http://spring-boot-demo.local/hero
+
+#### Helm Charts Linting
+```shell
+cd infrastructure-as-code-testing/helm-charts
+helm lint spring-boot-demo -f local-values.yaml
+```
+
+
+#### Helm Charts Tests with Helm Charts
+The tests are located in infrastructure-as-code-testing/helm-charts/spring-boot-demo/templates/tests. If you want to run the test, you need a running minikube
+
+```shell
+cd infrastructure-as-code-testing/helm-charts
+helm test spring-boot-demo-instance
+```
+
+#### Helm Charts Tests with Terratest
+The tests are located in infrastructure-as-code-testing/helm-charts/test. If you want to run the test, you need a running minikube and Golang on your machine.
+
+```shell
+cd infrastructure-as-code-testing/helm-charts/test
+go mod tidy
+go test . -v
 ```
