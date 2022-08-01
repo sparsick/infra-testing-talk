@@ -28,7 +28,7 @@
         <mockserver.version>5.11.2</mockserver.version>
         <java.version>17</java.version>
         <groovy.version>3.0.9</groovy.version>
-        <greenmail.version>1.6.5</greenmail.version>
+        <greenmail.version>1.6.10</greenmail.version>
         <docker.hostname>localhost</docker.hostname>
     </properties>
 
