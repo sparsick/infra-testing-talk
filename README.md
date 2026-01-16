@@ -1,3 +1,5 @@
+⚠️ **This repository is moved to https://codeberg.org/sparsick/infra-testing-talk** ⚠️
+
 # infra-testing-talk
 
 ![Build Status](https://github.com/sparsick/infra-testing-talk/workflows/MavenBuild/badge.svg)
